@@ -25,16 +25,17 @@
 import pi3d
 import time, glob, os, signal
 import threading
+import keyboard
 from subprocess import Popen, PIPE, STDOUT
 
 #
 # Adjust these parameters to fit your needs
 #
 FPS = 30							# Render FPS.  In most cases, you should leave this at 30
-DISPLAY_TIME = 11.0					# How long to display each image, in seconds
+DISPLAY_TIME = 5.0					# How long to display each image, in seconds
 FADE_TIME = 1.0						# Image fade duration, in seconds
 ERROR_FADE_TIME = 10.0				# Error screen fade in duration, in seconds
-IMAGE_DIR = "/mnt/photos/photos"	# Path containing jpg images (must be lower-case '.jpg' in filenames)
+IMAGE_DIR = "/media/pi/SP PHD U3/photo/iphone6"	# Path containing jpg images (must be lower-case '.jpg' in filenames)
 MUSIC_DIR = "/mnt/photos/music"		# Path containing mp3 music tracks, if desired
 SCAN_TIME_BASE = 5 * 60				# How often to scan for new images/music
 SCAN_TIME_ERROR = 1 * 60			# How often to scan while displaying the error image
@@ -554,9 +555,9 @@ while display.loop_running():
 				continue
 			time.sleep(2) # Wait before trying again
 	
-	#if keyboard.read() == 27: # Escape keys
-	#	keyboard.close()
-	#	display.stop()
+	if keyboard.is_pressed("q"): # Escape keys
+		#keyboard.close()
+		display.stop()
 
 # Clean up display
 display.destroy()
